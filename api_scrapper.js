@@ -17,7 +17,11 @@ app.get('/versiculo', async (req, res) => {
   const url = `https://bkjfiel.com.br/${livro}-${capitulo}-${versiculo}`;
 
   try {
-    const response = await axios.get(url);
+    const response = await axios.get(url, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/114.0.0.0 Safari/537.36'
+      }
+    });
     const $ = cheerio.load(response.data);
 
     // Selecionando pela combinação das classes
