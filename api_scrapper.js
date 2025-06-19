@@ -29,6 +29,8 @@ app.get('/versiculo', async (req, res) => {
   .replace(/\s+"/g, '"') // remove espaços antes de aspas de fechamento
   .trim();
 
+    console.log(texto);
+
     if (!texto) {
       return res.status(404).json({ erro: 'Versículo não encontrado' });
     }
