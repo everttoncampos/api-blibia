@@ -21,7 +21,13 @@ app.get('/versiculo', async (req, res) => {
     const $ = cheerio.load(response.data);
 
     // Selecionando pela combinação das classes
-    const texto = $('div.font-sans.text-xl.lg\\:text-2xl.xl\\:text-3xl').text().trim();
+    // const texto = $('div.font-sans.text-xl.lg\\:text-2xl.xl\\:text-3xl').text().trim();
+
+    const texto = $('div.font-sans.text-xl.lg\\:text-2xl.xl\\:text-3xl').text()
+  .replace(/\s+/g, ' ')  // substitui múltiplos espaços e quebras por um só espaço
+  .replace(/"\s+/g, '"') // remove espaços depois de aspas de abertura
+  .replace(/\s+"/g, '"') // remove espaços antes de aspas de fechamento
+  .trim();
 
     if (!texto) {
       return res.status(404).json({ erro: 'Versículo não encontrado' });
